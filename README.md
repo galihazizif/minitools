@@ -5,11 +5,16 @@ Tools kecil ini berguna ketika banyak tiket kereta api habis, membantu mengingat
 
 ```php tiket.php <yyyy> <mm> <dd> <stasiun_asal> <stasiun tujuan>```
 
-**yyyy** : Tahun keberangkatan, misal: 2017
-**mm** : Bulan keberangkatan, misal 09
-**dd** : Tanggal keberangkatan, misal 20
-**stasiun_asal** : Sesuai dengan kode stasiun, misal GMR untuk Gambir
-**stasiun_tujuan** : Sesuai dengan kode stasiun, misal PWT untuk Purwokerto
+**yyyy** : Tahun keberangkatan, misal: 2017   
+
+**mm** : Bulan keberangkatan, misal 09   
+
+**dd** : Tanggal keberangkatan, misal 20   
+
+**stasiun_asal** : Sesuai dengan kode stasiun, misal GMR untuk Gambir   
+
+**stasiun_tujuan** : Sesuai dengan kode stasiun, misal PWT untuk Purwokerto   
+
 
 Contoh
 
