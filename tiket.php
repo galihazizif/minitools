@@ -46,18 +46,31 @@ while(true){
 
 	echo "Respon: ".$httpcode.",OK:(".$ok."),NotOK(".$notOk.")\r";
 	
-	$search = '<input type="submit" name="Submit" value="&nbsp;&nbsp;Pesan&nbsp;&nbsp;" class="itButton"';
-	
-	if(stripos($data, $search) != false){
-		$txt = "Ada tiket untuk ".$tahun.$bulan.$tgl.",".$origination." to ".$destination.", buruan pesan.".PHP_EOL;
-		echo $txt;
-		exec("notify-send \"".$txt."\"");
-		exec("speaker-test -t sine -f 2000 -l 1");
-		break;
-		
-	}/*else{
-		exec("speaker-test -t sine -f 400 -l 1");
-	}*/
+	/*$search = '<input type="submit" name="Submit" value="&nbsp;&nbsp;Pesan&nbsp;&nbsp;" class="itButton"';*/
+	$arrSearch = [
+		'form_o_124',
+		'form_n_124',
+		'form_k_124',		
+		'form_b_124',
+		'form_w_124',
+		'form_m_124',
+		'form_o_120',
+		'form_n_120',
+		'form_k_120',		
+		'form_b_120',
+
+	];
+
+	foreach($arrSearch as $search){
+		if(stripos($data, $search) != false){
+			$txt = "Ada tiket untuk ".$tahun.$bulan.$tgl.",".$origination." to ".$destination.", buruan pesan.".PHP_EOL;
+			echo $txt;
+			exec("notify-send \"".$txt."\"");
+			exec("speaker-test -t sine -f 2000 -l 1");
+			break;
+		}
+	}
+
 	$i++;
 }
 
