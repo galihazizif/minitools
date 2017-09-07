@@ -1,13 +1,41 @@
 #!/usr/bin/php
 <?php
 
+function cekParam($param,$seq){
+	$label = [
+		1 => "Tahun",
+		2 => "Bulan",
+		3 => "Hari / Tanggal",
+		4 => "Stasiun asal",
+		5 => "Stasiun tujuan",
+		6 => "Pilihan kereta",
+	];
+
+	if(empty($param[$seq])){
+		echo $label[$seq]." harus diisi".PHP_EOL;
+		exit(0);
+	}
+
+	return $param[$seq];
+
+}
+
 $url = "https://tiket1.kereta-api.co.id/?_it8tnz=TXc9PQ==&_8dnts=YzJOb1pXUjFiR1U9";
 
-$tahun = !empty($argv[1])?$argv[1]:"2017";
-$bulan = !empty($argv[2])?$argv[2]:"06";
-$tgl = !empty($argv[3])?$argv[3]:"22";
-$origination = !empty($argv[4])?$argv[4]:"GMR#GAMBIR";
-$destination = !empty($argv[5])?$argv[5]:"PWT#PURWOKERTO";
+$tahun = cekParam($argv,1);
+$bulan = cekParam($argv,2);
+$tgl = cekParam($argv,3);
+$origination = cekParam($argv,4);
+$destination = cekParam($argv,5);
+$pilihanKereta = cekParam($argv,6);
+
+$arrSearch = [];
+$exploded = explode(',', $pilihanKereta);
+foreach($exploded as $ex){
+	if(!empty($ex)){
+		$arrSearch[] = "form_".$ex;
+	}
+}
 
 $fields = [
 	"tanggal" => $tahun.$bulan.$tgl."#Kamis, 22 Juni 2017",
@@ -47,7 +75,7 @@ while(true){
 	echo "Respon: ".$httpcode.",OK:(".$ok."),NotOK(".$notOk.")\r";
 	
 	/*$search = '<input type="submit" name="Submit" value="&nbsp;&nbsp;Pesan&nbsp;&nbsp;" class="itButton"';*/
-	$arrSearch = [
+	/*$arrSearch = [
 		'form_o_124',
 		'form_n_124',
 		'form_k_124',		
@@ -59,7 +87,7 @@ while(true){
 		'form_k_120',		
 		'form_b_120',
 
-	];
+	];*/
 
 	foreach($arrSearch as $search){
 		if(stripos($data, $search) != false){
