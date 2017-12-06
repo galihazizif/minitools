@@ -20,7 +20,7 @@ function cekParam($param,$seq){
 
 }
 
-$url = "https://tiket1.kereta-api.co.id/?_it8tnz=TXc9PQ==&_8dnts=YzJOb1pXUjFiR1U9";
+$url = "https://kai.id/train_schedule";
 
 $tahun = cekParam($argv,1);
 $bulan = cekParam($argv,2);
@@ -38,6 +38,7 @@ foreach($exploded as $ex){
 }
 
 $fields = [
+	"csrf_kai_id" => "1a555c4e17585de8adcde6a100373208",
 	"tanggal" => $tahun.$bulan.$tgl."#Kamis, 22 Juni 2017",
 	"origination" => $origination,
 	"destination" => $destination,
@@ -59,12 +60,14 @@ while(true){
 	curl_setopt($ch,CURLOPT_POST, 1);
 	curl_setopt($ch,CURLOPT_POSTFIELDS, http_build_query($fields));
 	curl_setopt($ch,CURLOPT_USERAGENT, $agent);
+	curl_setopt($ch,CURLOPT_HTTPHEADER,["Cookie: _ga=GA1.2.598175662.1511347394; BIGipServerpool_kai.id_http=1124667564.20480.0000; ci_session=oajn6rf9tfsdonb6kv55tpkhfkikaaei; csrf_cookie_kai_id=1a555c4e17585de8adcde6a100373208; TS01029465=015e85d922cdcf57573eaba8ff55aae8bff5ed703c0256a8956d17cdb187aa76e95c50f98ed45a2271db29e0f3d5428c25aa69578b9e84bd9a0d1bf7390ed527c94bcdddc30eb1748f17f938b6bbe6e08b8f773d94cce77e383f389dad68e8955f42abf7b0"]);
 	curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,20);
 	curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
 	$data = curl_exec($ch);
 	$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	curl_close($ch);
-	
+	/*echo $data;
+	exit();*/
 
 	if($httpcode == 200){
 		$ok++;
